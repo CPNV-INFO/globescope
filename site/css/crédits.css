@@ -1,0 +1,38 @@
+
+.img1 {
+
+    height: 306px;
+    width: 500px;
+    float: left;
+    margin-bottom: 50px;
+}
+
+.img2 {
+    height: 306px;
+    width: 500px;
+    float: right;
+    margin-bottom: 50px;
+    margin-top: -24px;
+
+}
+
+
+.img1 img{
+    height: 306px;
+}
+
+.img2 img{
+    margin-top: 24px;
+    height: 306px;
+}
+
+
+.container_credit {
+margin-bottom: 400px;
+
+}
+.label_credits{
+    font-size: 15px;
+    font-weight: bold;
+    cursor: auto;
+}

@@ -1,0 +1,3 @@
+virer les deux langues.
+ajouter pas de resultat sur la recherche du glob.
+Ajouter header et footer partout boutique

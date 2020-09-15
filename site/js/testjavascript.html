@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+colonne 1: <input type="text" id="cell1" value="Nouvelle"><br>
+colonne 2: <input type="text" id="cell2" value="valeur"><br>
+position:  <input type="number" id="pos" value="2"> Laisser vide pour insérer à la fin <br>
+<input type="button" value="insérer" onclick="init()">
+
+<table border="1" id="tableau">
+    <tr><td>1</td><td>2</td></tr>
+    <tr><td><span id="danscellule"></span></td></td><td>2</td></tr>
+    <tr><span id="uneligne"></span></tr>
+    <tr><td>1</td><td>2</td></tr>
+</table>
+
+</body>
+</html>
+<script>
+function init()
+{
+setTimeout(AjouterLignes(), 5000);
+}
+
+    function AjouterLignes()
+    { //
+        var test1= document.getElementById("cell1").value;
+        var test2=document.getElementById("cell2").value;
+        var pos=document. getElementById("pos").value;
+
+        if (pos>0){
+            var newRow = document.getElementById('tableau').insertRow(pos);
+        } else{
+            var newRow = document.getElementById('tableau').insertRow();
+        }
+
+        var newCell = newRow.insertCell(0);
+        newCell.innerHTML = test1;
+        newCell = newRow.insertCell(1);
+        newCell.innerHTML = test2;
+		setTimeout(init(), 5000);
+    }
+
+
+
+</script>

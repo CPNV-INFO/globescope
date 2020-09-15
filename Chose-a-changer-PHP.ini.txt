@@ -1,0 +1,2 @@
+Dans php.ini : dé-commenter extension=gd2,
+Changer la taille de upload_max_filesize = 2M => upload_max_filesize = 10M

@@ -1,0 +1,196 @@
+.table-edit {
+    width: 80%;
+    border-color: #BCDC53;
+}
+
+.formshow {
+    width: 20%;
+    float: right;
+}
+
+.titleshowchild {
+    position: absolute;
+    left: 42%;
+}
+
+.buttoneditshowchild {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.formscs {
+    width: 20%;
+    float: right;
+}
+
+.buttoneditscs {
+    text-decoration: none;
+    color: #ffffff
+}
+
+.category {
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.rouge {
+    background-color: red;
+}
+
+.orange {
+    background-color: darkorange;
+}
+
+.jaune {
+    background-color: yellow;
+}
+
+.vert {
+    background-color: mediumseagreen;
+}
+
+.bleu {
+    background-color: dodgerblue;
+}
+
+.violet {
+    background-color: blueviolet;
+}
+.violet2 {
+    background-color: violet;
+}
+.rouge2 {
+    background-color: lightcoral;
+}
+
+.orange2 {
+    background-color: salmon;
+}
+
+.jaune2 {
+    background-color: lightgoldenrodyellow;
+}
+
+.vert2 {
+    background-color: lightgreen;
+}
+
+.bleu2 {
+    background-color: lightblue;
+}
+
+.violet2 {
+    background-color: lavender;
+}
+
+.editbuttonglobe {
+    width: 300px;
+    height: 50px;
+    background-color: #000c8f
+}
+.moredesc{
+    font-size: 1.5em;
+    text-decoration: underline;
+    color: #3498db;
+}
+.link{
+    color: #3498db;
+    text-decoration: underline;
+    transition: 0.5s;
+}
+.link :hover{
+    color: black;
+}
+.buttonEdit{
+    margin-top: -193px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+.GoToChild{
+    background-color: #3498db;
+    padding: 5px;
+    border-radius: 8px;
+    border: groove;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+}
+.buttonMedia{
+    border-radius: 8px;
+    color: white;
+    background-color: #00A000;
+    border-color: black;
+}
+.UnlockallCMD{
+    position: absolute;
+    margin-left: 165px;
+}
+.backup{
+    position: absolute;
+    margin-left: 123px;
+}
+.log{
+    position: absolute;
+    margin-left: 210px;
+}
+.homegb2{
+    position: absolute;
+    right: 0;
+}
+
+.tablehome-infos{
+    mso-cellspacing: 1px;
+    width: 420px;
+
+
+}
+.medialink{
+    color: #0040D0;
+}
+.cmd_uploadway{
+    text-decoration: underline;
+    color: #3498db;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 15px;
+}
+.cmd_uploadway :hover{
+    color: black;
+}
+.Apercu{
+    margin-left: 35px;
+}
+thead.fixedth > tr > th {
+
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    top: 0;
+}
+.bc-blanc{
+    background-color: white;
+}
+.gradientSCS{
+    width: 210px;
+    background: rgb(255,255,0);
+    background: linear-gradient(90deg, rgba(255,255,0,1) 0%, rgba(255,255,0,1) 20%, rgba(60,179,113,1) 40%, rgba(60,179,113,1) 50%, rgba(60,179,113,1) 60%, rgba(30,144,255,1) 80%, rgba(30,144,255,1) 100%);
+}
+
+tr{
+    height: 35px;
+
+}
+.search-help{
+    color: white;
+    position: absolute;
+    right: 5px;
+    padding-top: 20px;
+}
+.return-button{
+    color: #0e90d2;
+    text-decoration: underline;
+    cursor: pointer;
+}

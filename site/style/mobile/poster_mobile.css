@@ -1,0 +1,313 @@
+/*POUR LA NAVBAR TEMPORARE
+============================================================
+*/
+.TEMPORAIRE
+{
+    display: none; 
+}
+
+
+
+
+
+/*
+============================================================
+*/
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#corps_de_page_posters
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.conteneur_lien_USB
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 6em;
+  color: white;
+  background-color: #0065BD;
+  border-radius: 2px;
+}
+
+.conteneur_lien_USB_div
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1em;
+  height: 6em;
+  color: white;
+  background-color: #0065BD;
+  border-radius: 2px;
+} 
+
+.lien_USB
+{
+  width: 4.45em;
+  font-size: 2.4em;
+  margin-left: 0.8rem;
+}
+
+.bouton_download_USB
+{
+  width: 9em;
+  margin: 1em;
+}
+
+#bouton_lien_download_USB
+{
+  border-radius: 6px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.6em;
+  font-size: 1.2em;
+}
+
+#div_image_cle_usb
+{
+  width: 4em;
+  height: 7.1em;
+  position: relative;
+  left: -0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#image_poster_cle_usb
+{ 
+  width: 6em;
+  transform: rotate(-25deg);
+}
+
+#lien_download_USB
+{
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+/*                            SECTION TITRE POSTERS
+==================================================================================
+*/
+
+#titre_posters
+{
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+  padding: 0px;
+  height: 7.7rem;
+  color: #0065BD;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  align-self: center;
+}
+
+#titre_globe_usb
+{
+  line-height: 40px;
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
+
+.sous_titre_glob_usb
+{
+  text-transform: none;
+  word-wrap: break-word;
+  font-size: large;
+  text-align: center;
+  color: #969696;
+  margin: 1rem;
+}
+
+.sous_titre_glob_poster
+{
+  text-transform: none;
+  font-size: large;
+  text-align: center;
+  color: #969696;
+  margin-top: 1rem;
+}
+
+/*                            SECTION POSTERS
+==================================================================================
+*/
+
+#section_posters
+{
+  margin-top: 0px;
+  padding: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteneur_posters
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0px;
+  border-width: 1px;
+  padding: 0px;
+}
+
+.posters_telechargeables
+{
+  width: 20em;
+  height: 30em;
+  margin-top: 0px;
+  margin: 1rem;
+  border: solid #e7e7e7 1px;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.poster_inside
+{
+  display: flex;
+  font-size: 1.1em;
+  justify-content: center;
+  color: #969696;
+  margin: 4px 0px;
+}
+
+.image_card_poster
+{
+  position: relative;
+  width: 100%;
+  height:12.4rem;
+  margin: 0px;
+  
+}
+
+.titre_card_poster
+{
+  font-size: 1.5rem;
+  color: #0065BD;
+  font-weight: normal;
+  text-transform: uppercase;
+
+}
+
+.bouton_download_poster
+{
+  color: white;
+  font-size: 1.2em;
+  background-color: #0065BD;
+  border-radius: 0px;
+  padding: 3px 7px;
+  border-radius: 2px;
+  margin: 35px 0px;
+  width: 215px;
+  display: flex;
+  justify-content: center;
+}
+
+.bouton_download_poster_p
+{
+  text-decoration: none;
+  display: block;
+  margin: 10px 5px;
+  color: white;
+}
+
+#bouton_generer_poster
+{
+  display: flex;
+  justify-content: center;
+}
+
+#card_poster_caractere_invisible
+{
+  color: white;
+}
+
+.bouton_download_poster:hover
+{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+#bouton_lien_download_USB:hover
+{
+  background-color: rgb(255, 255, 255);
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+
+/*
+===============================================================
+===============================================================
+*/
+
+
+
+
+#card_poster_caractere_invisible
+{
+  color: black;
+  text-align: center;
+}
+
+#input_id_souvenir
+{
+  width: 4rem;
+  margin-bottom: 0.15em;
+}
+
+.bouton_download_poster_p_souvenir
+{
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  color:white;
+  font-size: 0.92em;
+  font-weight: lighter;
+  text-decoration: none;
+  background-color: #0065BD;
+  border: 0px;
+  height: 2.2em;
+  width: 74rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouton_download_poster_p_souvenir:focus
+{
+  outline: 0;
+}
+
+.bouton_download_poster_p_souvenir:hover
+{
+  cursor: pointer;
+}
+
+#id_souvenir_perso
+{
+  color: #969696;
+}

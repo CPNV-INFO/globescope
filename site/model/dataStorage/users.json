@@ -1,0 +1,14 @@
+{
+  "0": {
+    "id": "1",
+    "username": "a",
+    "password": "$2y$10$B0Q4IEqe/4L7Wn7fTXUV/ed5M0QRxykx1o8Uyi7.U7ZYzKARXFqjS",
+    "level" : "1"
+  },
+  "1": {
+    "id": "2",
+    "username": "edmadmin",
+    "password": "$2y$10$WJQrD4QEzzzIZNwIfo1y3uyLyMVCUxQBbX2Gzkf//UyanCK5nZQN6",
+    "level" : "2"
+  }
+}

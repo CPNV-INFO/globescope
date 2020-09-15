@@ -201,6 +201,15 @@
 		var childPseudo = document.getElementById("childPseudo");
 		var childCitation = document.getElementById("childCitation");
 		var childRight = document.getElementById("childRight");
+        var childIDPlace = document.getElementById("childIDPlace");
+        var childEdit = document.getElementById("childEdit");
+        var childEquipe = document.getElementById("childEquipe");
+        var childVille = document.getElementById("childVille");
+        var childPays = document.getElementById("childPays");
+        var childMedia = document.getElementById("childMedia");
+        var childMedialink = document.getElementById("childMedialink");
+        var childAnneeprod = document.getElementById("childAnneeprod");
+        var childDesc = document.getElementById("childDesc");
 
 		childImage.onload = showOnClickDetails;
 		closeSideBar.onclick = hideSideBar;

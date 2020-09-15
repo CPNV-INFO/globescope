@@ -1,0 +1,80 @@
+.masque_formulaire_poster{
+  top:0px;
+  left: 0px;
+  position:fixed;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.75;
+   z-index: 1;
+}
+
+#formulaire_poster{
+  position: fixed;
+  z-index: 30;
+  background-color: white;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 20px;
+  top: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+#formulaire_poster #zone{
+  margin:25px;
+}
+
+#formulaire_poster .asterisque{
+  color: red;
+  width: 15px;
+}
+
+
+
+#formulaire_poster .label{
+  width: 70px;
+}
+
+#formulaire_poster tr{
+  height: 30px;
+}
+
+#formulaire_poster .champ{
+  height: 50px;
+}
+
+#formulaire_poster .button
+{
+  width: 80px;
+  height: 28px;
+  background-color: #0065BD;
+  color: white;
+}
+
+#formulaire_poster #checkbox_newletter{
+ text-align: center;
+}
+
+#formulaire_poster .zone_champ{
+  width:200px;
+}
+
+
+#formulaire_poster .button{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+#formulaire_poster #champ_necessaire{
+  float:right;
+}
+
+#formulaire_poster #compte_existant{
+  float:right;
+  font-size:12px;
+  color:#0065BD;
+  background:none;
+  border:none;
+}
+}

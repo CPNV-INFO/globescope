@@ -1,0 +1,63 @@
+
+/*                            SECTION BODY
+=========================================================================================================
+*/
+
+body{
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+/*                            SECTION HEADER
+=========================================================================================================
+*/
+
+header{
+  width:100%;
+}
+
+nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0065BD;
+  height: 3em;
+}
+
+
+#nav ul {
+  display: flex;
+  font-size: 25px;
+}
+
+#nav li {
+  margin-left:6em;
+  list-style-type: none
+}
+
+#nav li a {
+  text-decoration: none;
+  color:white;
+}
+
+#nav li a:hover {
+  color: lightblue;
+}
+
+#banniere{
+  height: 10em;
+  width: 100%;
+}
+
+#logo{
+  width: 12em;
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: absolute;
+  left: 1.4em;
+  top: 1.2em;
+}

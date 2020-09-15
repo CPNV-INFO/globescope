@@ -1,121 +1,177 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Globescope</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/style.css?d=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/sideBarStyle.css?d=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/searchBar.css?d=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/searchResults.css?d=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/helpStyle.css?d=<?php echo time(); ?>">
-    <link rel="stylesheet" href="css/progressBar.css?d=<?php echo time(); ?>">
-
-</head>
-
-<body>
-<span><img id="helpButton" class="GUI" src="images/questionMark.png"></span>
-<div id="Help" class="GUI">
-    <div id="box">
-        <div id="header">
-            <h3 class="aide" a href="">Help</h3>
-        </div>
-        <p id="closeHelp" class="closeButton" onclick="closeHelp()">X</p>
-        <div id="direction">
-            <img src="images/arrowKeys.png" height="50" width="80" alt="touches directions"/>
-            <p id="aideDeplacementSouris"> déplacez vous en maintenant le clic gauche de la souris.</p>
-        </div>
-        <div id="Aidereste" class="Aide">
-            <p id="aideZoom">utilisez les touches +/- pour zoomer/dézoomer</p>
-            <hr></hr>
-            <p id="aideAgrandirImage">Double-cliquez sur l'image pour l'agrandir et afficher ses informations</p>
-            <hr></hr>
-            <p id="aideRecherche">Pour recherche un/votre pseudo cliquez sur la loupe et ecrivez ensuite un/votre pseudo.</p>
-        </div>
-        <div class="languageSelect">
-            <span id="FR" onclick="aideFr()">FR</span>/<span id="EN" onclick="aideAng()">EN</span>/<span id="creditSpan" onclick="credit()">Credits</span>
-        </div>
-    </div>
-    <div id="creditBox">
-        <div id="header">
-            <h3 class="credit" a href="">Credit</h3>
-        </div>
-        <p id="closeCredit" class="closeButton" onclick="closeHelp()">X</p>
-        <img id="imageGroupe" src="images/photoGroupe.png" alt="Development Group">
-        <div id="Groupe">
-            <p id="groupeMembresContenu"></p>
-        </div>
-        <div class="languageSelect">
-            <span id="creditSpan" onclick="aideFr()">Help</span>
-        </div>
-    </div>
-</div>
-
-<div id="sideBar" class="GUI">
-    <p id="closeSideBar" class="closeButton">X</p>
-    <div class="loader" id="imageLoader"></div>
-    <div id="onClickDetails">
-        <img id="childImage">
-        <span id="separator"></span>
-        <div id="description">
-            <p id="childPseudo"></p>
-            <p id="childCitation"></p>
-            <p id="childRight"></p>
-        </div>
-    </div>
-    <div id="onSearchDetails" class="flexContainer">
-        <h1>Resultat de la recherche</h1>
-
-    </div>
-</div>
-
-<span><img id="showSearch" class="GUI" src="images/searchIcon.png"></span>
-
-<div id="searchBar" class="GUI">
-    <input type="text" id="searchText">
-    <span id="searchButton">Recherche</span>
-    </input>
-    <div id="onDynamicSearch">
-
-    </div>
-</div>
+<?php
+/**
+ * Created By PhpStorm
+ * User: benoit.pierrehumbert  and simon.cuany
+ * Date: 04.02.2020
+ * Time: 15:57
+ */
+session_start();
+require "controler/controler.php";
+$errors=null;
+$url =null;
+if (isset($_GET['action'])){
+    $action=$_GET['action'];
+}
+//--------------------------------------------
 
 
-<div id="loading">
-    <p>Chargement...</p>
-</div>
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    $url = "https://";
+else
+    $url = "http://";
+// Append the host(domain name, ip) to the URL.
+$url.= $_SERVER['HTTP_HOST'];
 
-<script src="js/three.min.js"></script>
-<script src="js/three/controls/OrbitControls.js"></script>
-<script src="js/three/loaders/DDSLoader.js"></script>
-<script src="js/loader.js"></script>
-<script src="js/searchChild.js"></script>
-<script src="js/childClicked.js"></script>
-<script src="js/Tween.js"></script>
+// Append the requested resource location to the URL
+$url.= $_SERVER['REQUEST_URI'];
 
-<script type="application/x-glsl" id="sky-vertex">
-varying vec2 vUV;
 
-void main() {
-    vUV = uv;
-    vec4 pos = vec4(position, 1.0);
-    gl_Position = projectionMatrix * modelViewMatrix * pos;
+if (strpos($url, 'forum') !== false) {
+    forum();
+}
+if (strpos($url, 'boutique') !== false) {
+    boutique();
 }
 
-</script>
-<script type="application/x-glsl" id="sky-fragment">
-uniform sampler2D texture;
-varying vec2 vUV;
-
-void main() {
-    vec4 sample = texture2D(texture, vUV);
-    gl_FragColor = vec4(sample.xyz, sample.w);
+//------------------------------------------
+if (isset($_GET['IDimage'])){
+    $IDimage=$_GET['IDimage'];
 }
-
-</script>
-
-<script src="js/globescope.js"></script>
-
-</body>
-</html>
+if (isset($_GET['welcome'])){
+    $welcome=$_GET['welcome'];
+}else {
+    $welcome='';
+}
+if (isset($_GET['errors'])){
+    $errors=$_GET['errors'];
+}
+if (!isset($_SESSION['fail'])){
+    $_SESSION['fail']=true;
+}
+//Set var for save -----------------------------------------
+if (isset($_POST['meridien'])){
+    $meridien=$_POST['meridien'];
+}
+if (isset($_POST['latitude'])){
+    $latitude=$_POST['latitude'];
+}
+if (isset($_POST['longitude'])){
+    $longitude=$_POST['longitude'];
+}
+if (isset($_POST['idplace'])){
+    $idplace=$_POST['idplace'];
+}
+if (isset($_POST['idimage'])){
+    $idimage=$_POST['idimage'];
+}
+if (isset($_POST['team'])){
+    $team=$_POST['team'];
+}
+if (isset($_POST['Droit'])){
+    $Droit=$_POST['Droit'];
+}
+if (isset($_POST['Slogan'])){
+    $Slogan=$_POST['Slogan'];
+}
+if (isset($_POST['Pseudo'])){
+    $Pseudo=$_POST['Pseudo'];
+}
+if (isset($_POST['Pays'])){
+    $Pays=$_POST['Pays'];
+}
+if (isset($_POST['Ville'])){
+    $Ville=$_POST['Ville'];
+}
+if (isset($_POST['Media'])){
+    $Media=$_POST['Media'];
+}
+if (isset($_POST['Titre'])){
+    $Titre=$_POST['Titre'];
+}
+if (isset($_POST['ecole'])){
+    $ecole=$_POST['ecole'];
+}
+if (isset($_POST['Anneeprod'])){
+    $Anneeprod=$_POST['Anneeprod'];
+}
+if (isset($_POST['desc'])){
+    $desc=$_POST['desc'];
+}
+if (isset($_POST['newtitle'])){
+    if ($_POST['newtitle']!='') {
+        $_SESSION['newtitle'] = $_POST['newtitle'];
+    }else{
+        $_SESSION['newtitle']=null;
+    }
+}
+//END set var for save -----------------------------------------
+if (isset($action)) {
+    switch ($action) {
+        case 'home';
+            home();
+            break;
+        case 'OTHER';
+            OTHER();
+            break;
+         case 'credits';
+            credits();
+            break;
+        case 'editchild';
+            editchild($IDimage);
+            break;
+        case 'save';
+            save($IDimage, $meridien, $latitude, $longitude, $idplace, $team, $Droit, $Slogan, $Pseudo, $Pays, $Ville, $Media, $Anneeprod, $desc, $Titre,$ecole);
+            break;
+        case 'showchilds';
+            showchilds($welcome);
+            break;
+        case 'showBackup';
+            showBackup();
+            break;
+        case 'showLog';
+            showLog();
+            break;
+        case 'showchildsSearch';
+            showchildsSearch();
+            break;
+        case 'GetData';
+            GetData();
+            break;
+        case 'tryLogin';
+            tryLogin();
+            break;
+        case 'disconnect';
+            disconnect();
+            break;
+        case 'testhashed';
+            testhashed();
+            break;
+        case 'easteregg';
+            easteregg();
+            break;
+        case 'uploadfile';
+            uploadfile($IDimage);
+            break;
+        case 'uploadimg';//marche pas en ligne
+            uploadimg($IDimage);
+            break;
+        case 'uploadmedia';
+            uploadmedia($IDimage,$errors);
+            break;
+        case 'uploadimage';
+            uploadimage($IDimage);
+            break;
+        case 'forum';
+            forum();
+            break;
+        case 'boutique';
+            boutique();
+            break;
+        default:
+            homepage();
+            break;
+    }
+}else{
+    homepage();
+}
+?>

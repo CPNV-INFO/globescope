@@ -1,0 +1,85 @@
+[
+  {
+    "IDPlace": "17",
+    "IDImage": "0-10-6",
+    "mer": "0",
+    "lat": "10",
+    "lon": "6",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+  },
+  {
+    "IDPlace": "18",
+    "IDImage": "0-10-7",
+    "mer": "0",
+    "lat": "10",
+    "lon": "7",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+    
+  },
+  {
+    "IDPlace": "19",
+    "IDImage": "0-10-8",
+    "mer": "0",
+    "lat": "10",
+    "lon": "8",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+    
+  },
+  {
+    "IDPlace": "20",
+    "IDImage": "0-10-9",
+    "mer": "0",
+    "lat": "10",
+    "lon": "9",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+    
+  },
+  {
+    "IDPlace": "26",
+    "IDImage": "0-11-10",
+    "mer": "0",
+    "lat": "11",
+    "lon": "10",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+    
+  },
+  {
+    "IDPlace": "21",
+    "IDImage": "0-11-5",
+    "mer": "0",
+    "lat": "11",
+    "lon": "5",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+    
+  },
+  {
+    "IDPlace": "22",
+    "IDImage": "0-11-6",
+    "mer": "0",
+    "lat": "11",
+    "lon": "6",
+    "Pseudo": "",
+    "Droit": "",
+    "Slogan": "",
+    "Provenance": ""
+    
+  }
+]

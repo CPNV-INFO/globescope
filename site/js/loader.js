@@ -55,6 +55,7 @@ function loadData(scene,canvContainer,controls)
 
 
             var totalImages = 0;
+            var progressImages = 1;
             var imageLoaded = 0;
             var i;
             for(i in data)
@@ -78,18 +79,28 @@ function loadData(scene,canvContainer,controls)
                     if(data[x].ImageOK != 0)
                     {
                         index++;
+
                         //afficher le canvas lorsque la dernière image est chargée
                         
-                        file ="images/64-64/"+data[x].IDImage+".png";                   
+                        file ="images/64-64/"+data[x].IDImage+".png";
                         texture =  textureLoader.load( file, function()
                         {
                             imageLoaded++;
+                            //progress bar
+                            if (imageLoaded==Math.round(totalImages/100)*progressImages)
+                            {
+
+                                progressImages++;
+                                document.getElementById("progress_bar").style.width = progressImages + '%';
+                            }
                             if(imageLoaded == totalImages)
                             {
                                 document.getElementById("loading").style.display = "none";
                                 controls.autoRotate = false;                                
                             }
                         });
+
+
                         //Inversion des textures --
                         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
                         texture.repeat.x = -1;
@@ -122,7 +133,7 @@ function loadData(scene,canvContainer,controls)
         }
     };
 
-    xmlhttp.open("POST", "GetData.php", true);
+    xmlhttp.open("POST", "index.php?action=GetData", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     
     xmlhttp.send("x=" + dbParam + "&Mode=load");    

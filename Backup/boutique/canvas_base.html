@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Génération Souvenir Personnalisé</title>
+	<style>
+		/**import de la police utilisée -> police EDM**/
+		@import url(https://www.fontsquirrel.com/fonts/source-sans-pro);
+		/**css pour l'affichage à l'écran**/
+		@media screen {
+			body, input{
+				font-family: "source sans pro";
+				text-align: center;
+			}
+			canvas{
+				border: 1px dotted gray;
+				background-color:white;
+			}
+		}
+		/**css pour l'impression**/		
+		@media print{
+			header, footer, .texte, input{
+				display:none;
+				
+			}
+
+			canvas{
+				position: absolute;
+				top: 0;
+				left: 0;
+				border: none;
+  				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+
+		@page{
+			margin-top: 0;
+   	 		margin-bottom: 0;
+    		margin-left: 0;
+    		margin-right: 0;
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+		<!-- Header du site -->
+	</header>
+	<div>
+		<!-- Texte de présentation de la page du site -->
+		<p class="texte">
+			Générez un souvenir de votre participation à "Un Monde Plus Juste", avec votre propre photo ! <br>
+			Pour cela, relevez le numéro associé à votre photo sur le globescope et renseignez-là ci-dessous : <br> <br>
+			Numéro de la place sur le globe  <input type="text" size="5" value="" id="search">
+		</p>
+		<p>
+
+			<!-- bouton de génération du poster selon le numéro de la place -->
+			<input type="button" value="Générer" onclick="fnReaffiche()">
+
+			<!-- bouton d'impression du poster -->
+			<input type="button" value="Imprimer" onclick="fnPrint()">	
+			<br><br></p>
+			<p class="texte">
+				Des marges non-souhaitées sur votre document ? Vérifiez les paramètres d'impression (marges) ! 
+			</p>
+		<p>
+			<!-- zone du poster -->
+			<canvas id="canvas1" width="1260" height="1782">
+	
+		</p>
+	</canvas>
+	</div>
+	<footer>
+		<!-- footer du site -->
+	</footer>
+</body>
+</html>
+
+
+<!-- script de génération du poster -->
+<script type="text/javascript">
+	//Variables globales
+	var aI= new Array();
+
+	//Récupération de la place via le lien html
+	//écriture du paramètre ?id=
+	var chaine = window.location.search;
+
+	//on retire jusqu'au signe =
+	n = chaine.indexOf("=");
+	chaine = chaine.substring(n + 1, 10);
+	document.getElementById("search").value = chaine;
+
+	//Lien avec le canvas
+	var canvas = document.getElementById("canvas1"); //pour écrire dans le canvas
+	var ctx = canvas.getContext("2d");
+
+	//emplacement sur le globe de l'image qu'on veut charger
+	var placeGlobe = parseInt(chaine);
+	var placeTableau=0;//provisoire
+	//variables pour faciliter l'appel des informations de l'enfant, pour l'instant vides
+	var imgID = "";
+	var imgPseudo = "";
+	var imgDroit = "";
+	var imgSlogan = "";
+	var flagChargement=0;// le chargement du fond=1, des données=2, de l'image de l'enfant=4
+
+	//variable pour l'image de fond
+	var imgFond = new Image();			//on ne sait pas encore laquelle charger
+	//variable pour l'image de l'enfant
+	var imgPortrait = new Image(); 		//on ne sait pas encore laquelle charger
+	imgFond.src = "../images/Souvenir_Maquette_Vertical_Leger.png";
+	imgFond.onload = function () {
+		flagChargement+=1;
+		fnAffiche();
+	};
+
+	//Appeler le fichier json
+	var requestURL = '../model/dataStorage/images.json';// pour l'instant sans chemin
+	var request = new XMLHttpRequest();
+	request.open('POST', requestURL);
+	request.responseType = 'json';
+	request.send();
+
+	request.onload = function() {
+		flagChargement+=2;
+		var aimages = request.response;
+		//convertir en vrai JSON
+		var JSimg = JSON.stringify(aimages, null, "\t");
+		//convertir en tableau, liste ordres
+		aI = JSON.parse(JSimg);
+
+		//emplacement de l'enfant dans le tableau
+		placeTableau = fnRecherche(placeGlobe);
+
+		if (placeTableau == undefined) {
+			alert("Numéro de place invalide !");
+		} else {
+
+			//variables pour faciliter l'appel des informations de l'enfant
+			imgID = aI[placeTableau].IDImage;
+			imgPseudo = aI[placeTableau].Pseudo;
+			imgDroit = aI[placeTableau].Droit;
+			imgSlogan = aI[placeTableau].Slogan;
+
+			//Lien vers les images
+			//définition de l'image d'enfant à charger
+			imgPortrait.src = fnChemin(placeTableau);
+
+			//chargement du portrait de l'enfant
+			imgPortrait.onload = function () {
+				flagChargement += 4;
+				fnAffiche();
+			}
+		}
+	}
+// Ensemble des fonctions appelées dans le script
+	
+	//Procédure qui génère le souvenir personnalisé
+	function fnAffiche() {
+
+		//si le fond, le portrait et les données sont chargées
+		if (flagChargement == 7) {
+			//afficher le fond
+			ctx.drawImage(imgFond, 0, 0, 1260, 1782);
+
+			//charger le portrait dans son cadre
+			ctx.drawImage(imgPortrait, 597, 399, 540, 675);
+
+			//afficher le pseudo de l'enfant
+			//pseudo qui doit être affiché -> récupéré depuis l'ID
+			var pseudo = imgPseudo;
+			//police et taille du texte
+			ctx.font = "small-caps 42px Source Sans Pro Black";
+			//couleur du texte (remplissage)
+			ctx.fillStyle = '#006CB7';
+			//couleur du texte (contour)
+			ctx.strokeStyle = '#006CB7';
+			//alignement du texte (vertical et horizontal)
+			ctx.textAlign = "center";
+			ctx.textBaseline = "center";
+			//vérification de la longueur du pseudo
+			pseudo = fnLimit("catPseudo", pseudo);
+			//positionnement du texte
+			ctx.fillText(pseudo, 871, 1208);
+
+			//afficher le droit choisi par l'enfant
+			//droit qui doit être affiché -> récupéré depuis ^droit
+			var droit = imgDroit;
+			//police et taille du texte
+			ctx.font = "22pt Source Sans Pro Regular";
+			//couleur du texte (remplissage)
+			ctx.fillStyle = '#000000';
+			//couleur du texte (contour)
+			ctx.strokeStyle = '#000000';
+			//alignement du texte (vertical et horizontal)
+			ctx.textAlign = "center";
+			ctx.textBaseline = "center";
+			//vérification de la longueur du droit
+			droit = fnLimit("catDroit", droit);
+			//positionnement du texte
+			ctx.fillText(droit, 479, 1458);
+
+			//afficher le slogan de l'enfant
+			//slogan qui doit être affiché -> récupéré depuis le slogan
+			var slogan = imgSlogan;
+			//police et taille du texte
+			ctx.font = "22pt Source Sans Pro Regular";
+			//Pas de changement de couleur -> Couleur identique au droit
+			//alignement du texte (vertical et horizontal)
+			ctx.textAlign = "center";
+			ctx.textBaseline = "center";
+			//vérification de la longueur du slogan
+			slogan = fnLimit("catSlogan", slogan);
+			//positionnement du texte
+			ctx.fillText(slogan, 479, 1539);
+
+			//afficher le numéro de place de l'enfant
+			//place qui doit être affiché -> récupéré depuis la place
+			var place = "Place n° " + placeGlobe;
+			//police et taille du texte
+			ctx.font = "16pt Source Sans Pro Regular";
+			//alignement du texte (vertical et horizontal)
+			ctx.textAlign = "right";
+			ctx.textBaseline = "center";
+			//positionnement du texte
+			ctx.fillText(place, 803, 1613);
+		}
+	}
+
+	//Procédure pour abréger les textes qui sont trop conséquents
+		function fnLimit(catégorie, txt) {
+			//variable pour stocker la valeur de la longueur du texte
+			var mesure = ctx.measureText(txt).width;
+			//variables pour récupérer les caractères excédant la limite de caractères
+				var txtReste = "";
+				var mot = "";
+				var mesureReste;
+				var continuerReste = true;
+
+			//définition de la limite la plus basse (pseudo) pour la largeur du texte
+				var limite = 540;
+			//changement de la valeur limite s'il ne s'agit pas d'un pseudo
+				if (catégorie != "catPseudo") {
+					limite = 608;
+				}
+			//comparaison de la mesure avec la limite
+				while(mesure > limite){
+					var n = 0;
+					for(var i=txt.length; i>0; i--){
+						if(txt[i] == " "){
+							i = 0;
+						} else {
+							n += 1;
+						}
+					}	
+
+					if(continuerReste){
+						mot = txt.substring(txt.length - n, txt.length);
+						mesureReste = ctx.measureText(txtReste).width + ctx.measureText(mot).width;
+						//si le texte a dépassé la limite de caractère, remplacer les mots qui n'ont pu être ajouté au txtreste
+						if(mesureReste > limite){
+							txtReste += " ..." ;
+							continuer = false;
+						} else{
+							txtReste = mot + txtReste;
+						}
+					}
+						
+					txt = txt.substring(0, txt.length- n);
+					mesure = ctx.measureText(txt).width ;
+				}
+
+				//détermine l'emplacement de l'écriture du surplus en fonction de la catégorie de texte (pseudo, slogan ou droit)
+				if(catégorie=="catSlogan"){
+					ctx.fillText(txtReste, 479, 1570);
+				}
+				else if (catégorie=="catDroit"){
+					ctx.fillText(txtReste, 479, 1489);
+				}
+				else{
+					ctx.fillText(txtReste, 871, 1250);
+				}
+					
+				//retourne le texte qui doit être affiché
+				return txt;
+		}
+
+	//Procédure qui lance l'impression du souvenir personnalisé
+		function fnPrint() {
+			window.print();
+
+		}
+
+	//Procédure pour charger une autre image d'enfant (via le contrôle texte -> n° de place)
+		function fnReaffiche() {
+			//définition de l'image à charger depuis ce que l'utilisateur a écrit
+				chaine = document.getElementById("search").value;
+				window.location.search = "?id="+ chaine;
+				placeGlobe = parseInt(chaine);
+
+			//emplacement de l'enfant dans le tableau
+				placeTableau = fnRecherche(placeGlobe);
+
+			//variables pour faciliter l'appel des informations de l'enfant
+				imgID = aI[placeTableau].IDImage;
+				imgPseudo = aI[placeTableau].Pseudo;
+				imgDroit = aI[placeTableau].Droit;
+				imgSlogan = aI[placeTableau].Slogan;
+
+			//Réinitialise le nombre d'images chargées
+				nbImagesChargees = 1;
+
+			//Définition de l'image à charger
+				imgPortrait.src = fnChemin(placeTableau);
+
+			//Chargement du souvenir
+				imgPortrait.onload = function () {
+					fnAffiche();
+				}
+		}
+
+	//Procédure pour charger l'image de l'enfant
+		function fnChemin(place){
+			var pathImgEnfant;
+			//vérifie que la place est bien un numéro
+				if (place != NaN) {
+					pathImgEnfant = "..\\images\\400-500\\" + imgID + ".jpg";
+				} else {
+					pathImgEnfant = "..\\images\\blanc.png";
+				}
+				return pathImgEnfant;
+		}
+
+	//Procédure pour recherche l'image associée à la place.
+	function fnRecherche(numeroPlace) {
+		//parcourir le tableau pour trouver l'ID
+		var emplacementTableau;
+		if(numeroPlace < 5000){
+			//boucle pour parcourir le tableau afin de trouver la correspondance
+			for (var i = 0; i < aI.length; i++) {
+
+				//vérifie la correspondance entre le numéro donné et l'ID de la place
+				if (aI[i].IDPlace == numeroPlace) {
+					//enregistre le nom de l'image
+					emplacementTableau = i;
+					return emplacementTableau;
+				}
+			}
+		}
+
+		emplacementTableau = undefined;
+		//window.location =  adresse boutique ou autre page erreur -> a la place de l'alerte
+
+		return emplacementTableau;
+	}
+</script>

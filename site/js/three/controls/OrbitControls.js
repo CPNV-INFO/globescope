@@ -627,6 +627,17 @@ THREE.OrbitControls = function ( object, domElement ) {
 			break;
 			}
 
+			case "MINUS":{
+				dollyIn( getZoomScale() );
+				break;
+			}
+
+			case "PLUS":{
+				dollyOut( getZoomScale() );
+				alert("PLUS");
+				break;
+			}
+
 			case "default":{
 			break;
 			}
@@ -792,6 +803,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 
 	window.addEventListener( 'keypress', onKeyPress, false);
+	iconPlus.addEventListener( 'click', onKeyPress("PLUS"));
+	iconMinus.addEventListener( 'click', onKeyPress("MINUS"));
 
 	window.addEventListener( 'keydown', onKeyDown, false );
 
